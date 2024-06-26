@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif; 
+  }
+
+  .navbar-container {
+    margin-top: 50px; 
+  }
+
+  .navbar {
+    background-color: rgba(235, 119, 168, 0.5);
+    padding: 20px 20px; 
+    border-radius: 30px; 
+    display: flex;
+    align-items: center;
+    position:top;
+    top: 10px;
+
+  }
+
+  .logo img {
+    height: 40px; 
+    margin-right: 10px; 
+  }
+
+  .brand {
+    font-family: 'Italianno', cursive; 
+    font-size: 40px;
+    color: white;
+    margin-right: auto;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  .profile-logo img {
+    height: 30px; 
+    margin-right: 10px; 
+  }
+
+  .separator {
+    height: 20px;
+    border-right: 2px solid white;
+    margin: 0 15px;
+  }
+  .fa-user {
+    font-size: 25px; 
+  }
+  /*container for welcome paragraph*/
+  .container {
+      max-width: 600px;
+      margin: 20px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden; 
+      float: left; 
+      position: relative; 
+  }
+
+  /*css for home page container */
+  .container h2 {
+      font-size: 62px; 
+  }
+  .container p{
+      font-size: 20px;
+  }
+
+  /* css for image*/
+  .side-image {
+      flex-grow: 2;
+  }
+  .side-image img {
+      width: 45%; 
+      height: 100%; }
+  
+  /* css for buttons */
+  .container-buttons {
+      margin-top: 60px;
+      display: flex;
+      justify-content: flex-start;
+  }
+  .container-buttons button {
+      margin-right: 10px;
+      padding: 10px;
+      background-color: #ff80ab;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+  }
+  /* css for social media icon */
+  .social-icons {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      color: #070707; 
+  }
+  .fa-brands {
+      font-size: 24px; 
+      margin: 5px; 
+  }
+  
+  .copyright {
+      position: fixed;
+      bottom: 35px; 
+      left: 20px; 
+      color: #555; }
+  

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italianno&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'CSS/Main.css' %}">
+</head>
+<body>
+    <!-- div class for nav bar -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <div class="brand">FemFlow</div>
+            <ul class="nav-links">
+            <a href="#" class="nav-link"><i class="fas fa-user"></i></a>
+            <li>
+                <a href="" class="nav-link">{{ username }}</a>
+            </li>
+            <li class="separator"></li>
+            <li>
+                <a href="{% url 'period-logout' %}" class="btn btn-primary">log-out</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- div class for the button that controls the calendar-->
+        <div class="calendar-controls">
+            <button onclick="changeMonth(-1)"><<</button>
+            <span id="currentMonthYear"></span>
+            <button onclick="changeMonth(1)">>></button>
+        </div>
+
+        
+
+    <div id="calendar">
+        <div id="notification" class="notification"></div> 
+    <script>
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        let periodDates = [];
+
+        function createCalendar() {
+            const calendar = document.getElementById('calendar');
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+
+            document.getElementById('currentMonthYear').textContent = `${getMonthName(currentMonth)} ${currentYear}`;
+
+            // Clearing previous calendar
+            calendar.innerHTML = '';
+
+            // Creating header row with days of the week
+            daysOfWeek.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'day';
+                dayHeader.textContent = day;
+                calendar.appendChild(dayHeader);
+            });
+
+            // Creating empty cells for days before the first day of the month
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'day';
+                calendar.appendChild(emptyCell);
+            }
+
+            // Creating cells for the days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'day';
+                dayCell.textContent = i;
+                dayCell.addEventListener('click', () => onDateClick(i));
+                
+                // Checking if the day is a period day and apply the period-day class
+                if (periodDates.includes(`${currentYear}-${currentMonth + 1}-${i}`)) {
+                    dayCell.classList.add('period-day');
+                }
+
+                calendar.appendChild(dayCell);
+            }
+        }
+
+        function onDateClick(day) {
+            const selectedDate = new Date(currentYear, currentMonth, day);
+            const formattedDate = selectedDate.toLocaleDateString('en-US');
+            if (confirm(`Mark ${formattedDate} as a period day?`)) {
+                markPeriodDate(selectedDate);
+            }
+        }
+
+        function markPeriodDate(date) {
+            const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+            
+            if (!periodDates.includes(formattedDate)) {
+                periodDates.push(formattedDate);
+            } else {
+                periodDates = periodDates.filter(d => d !== formattedDate);
+            }
+
+            createCalendar();
+        }
+
+        function changeMonth(delta) {
+            currentMonth += delta;
+
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+
+            createCalendar();
+        }
+
+        function getMonthName(monthIndex) {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            return months[monthIndex];
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.textContent = 'Your period is incoming!';
+            setTimeout(() => {
+                notification.textContent = '';
+            }, 5000); // Clearing notification after 5 seconds
+        }
+        createCalendar();
+        showNotification();
+    </script>
+</div>
+
+    <!-- symptoms form -->
+    <div class="container">
+        <h2>Symptoms Logging</h2>
+        <form id="symptomsForm">
+            <div class="symptom-container">
+                <button type="button" class="symptom-button" data-name="Symptom 1">Headache</button>
+                <div class="intensity-container">
+                    <input type="number" name="intensity1" min="1" max="5" placeholder="Intensity (1-5)" >
+                </div>
+            </div>
+            <div class="symptom-container">
+                <button type="button" class="symptom-button" data-name="Symptom 2">Tender breast</button>
+                <div class="intensity-container">
+                    <input type="number" name="intensity2" min="1" max="5" placeholder="Intensity (1-5)" >
+                </div>
+            </div>
+            <div class="symptom-container">
+                <button type="button" class="symptom-button" data-name="Symptom 3">Cramps</button>
+                <div class="intensity-container">
+                    <input type="number" name="intensity2" min="1" max="5" placeholder="Intensity (1-5)" >
+                </div>
+            </div>
+            <div class="symptom-container">
+                <button type="button" class="symptom-button" data-name="Symptom 4">Breakouts</button>
+                <div class="intensity-container">
+                    <input type="number" name="intensity2" min="1" max="5" placeholder="Intensity (1-5)">
+                </div>
+            </div>
+            <div class="symptom-container">
+                <button type="button" class="symptom-button" data-name="Symptom 5">Mood swings</button>
+                <div class="intensity-container">
+                    <input type="number" name="intensity2" min="1" max="5" placeholder="Intensity (1-5)" >
+                </div>
+            </div>
+            <div class="symptom-container">
+                <button type="button" class="symptom-button" data-name="Symptom 6"> Back Pain</button>
+                <div class="intensity-container">
+                    <input type="number" name="intensity2" min="1" max="5" placeholder="Intensity (1-5)" >
+                </div>
+            </div>
+             <br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
+            <br> 
+            <button type="submit">Log Symptoms</button>
+        </form>
+    </div>
+    
+    <script>
+     
+        // Function to toggle active state of symptom buttons
+document.querySelectorAll('.symptom-button').forEach(item => {
+    item.addEventListener('click', event => {
+        item.classList.toggle('active');
+    });
+});
+
+document.getElementById("symptomsForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var activeSymptoms = document.querySelectorAll('.symptom-button.active');
+    if (activeSymptoms.length < 1) {
+        alert("Please select at least one symptom.");
+        return;
+    }
+
+
+    var validIntensity = true;
+    activeSymptoms.forEach(button => {
+        var intensityInput = button.nextElementSibling.querySelector('input[type="number"]');
+        // Validating intensity only if it's a selected symptom
+        if (intensityInput.value === "") {
+            alert("Please enter intensity for all selected symptoms.");
+            validIntensity = false;
+            return; // Exiting forEach loop early if any intensity is missing
+        }
+    });
+
+    if (!validIntensity) {
+        return; // Stoping further processing if intensity is missing
+    }
+    // Collecting selected symptoms and intensities
+    var symptoms = [];
+    var intensities = [];
+    document.querySelectorAll('.symptom-button.active').forEach(button => {
+        symptoms.push(button.getAttribute('data-name'));
+        var intensityInput = button.nextElementSibling.querySelector('input[type="number"]');
+        intensities.push(intensityInput.value);
+    });
+
+    var date = document.getElementById("date").value;
+
+    // Logging symptoms to console
+    console.log("Date: " + date);
+    for (var i = 0; i < symptoms.length; i++) {
+        console.log("Symptom " + (i + 1) + ": " + symptoms[i] + ", Intensity: " + intensities[i]);
+    }
+
+    // Reset form
+    document.getElementById("symptomsForm").reset();
+    document.querySelectorAll('.symptom-button.active').forEach(button => {
+        button.classList.remove('active');
+    });
+    var notification = document.createElement('div');
+    notification.textContent = "Symptoms logged";
+    notification.classList.add('notification');
+    document.body.appendChild(notification);
+    setTimeout(function() {
+        notification.style.display = "none";
+    }, 3000); // Hide the notification after 3 seconds
+
+});
+
+/* function daysUntilNextPeriod() {
+    // Get today's date
+    var today = new Date();
+    // Assuming period comes every 28 days, adjust this as needed
+    var periodCycleLength = 28;
+    // Calculate days until next period
+    var daysUntilNext = periodCycleLength - ((today.getTime() - lastPeriodDate.getTime()) / (1000 * 60 * 60 * 24)) % periodCycleLength;
+    // Round the number of days and return
+    return Math.round(daysUntilNext);
+  }
+
+  // Set the last period date (you can adjust this to get it from your data source)
+  var lastPeriodDate = new Date('2024-03-01'); // Example date
+
+  // Function to update the notification text
+  function updateNotification() {
+    var daysLeft = daysUntilNextPeriod();
+    var notification = document.getElementById('periodNotification');
+    notification.textContent = daysLeft;
+  }
+
+  // Call the updateNotification function initially
+  updateNotification();
+
+  // Update the notification every hour (adjust this interval as needed)
+  setInterval(updateNotification, 3600000); // 1 hour in milliseconds */
+</script>
+    
+</body>
+</html>

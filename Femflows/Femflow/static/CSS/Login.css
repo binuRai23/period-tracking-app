@@ -1,0 +1,151 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif; 
+ }
+
+  .navbar-container {
+    margin-top: 50px; 
+  }
+
+  .navbar {
+    background-color: rgba(235, 119, 168, 0.5);
+    padding: 20px 20px; 
+    border-radius: 30px; 
+    display: flex;
+    align-items: center;
+  }
+
+  .brand {
+    font-family: 'Italianno', cursive; 
+    font-size: 40px;
+    color: white;
+    margin-right: auto;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  .profile-logo img {
+    height: 30px; 
+    margin-right: 10px; 
+  }
+
+  .separator {
+    height: 20px;
+    border-right: 2px solid white;
+    margin: 0 15px;
+  }
+  .fa-user {
+    font-size: 25px; 
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80vh;
+  }
+
+  .login-form {
+     background-image: url('../img/about.jpeg');
+     padding: 20px;
+     border-radius: 10px;
+     width: 50%;
+     margin-left: 10%;
+     height: 350px;
+     text-align: center; /* Center the labels */
+     display: block;
+
+  }
+
+  .login-form h2 {
+     text-align: center;
+     color: #fff;
+  }
+
+  .login-form label {
+     display: block;
+     margin: 10px 0 20px;
+     color: #333;
+  }
+
+  .login-form input {
+     width: 60%;
+     padding: 10px;
+     margin-bottom: 15px;
+     border: 1px solid #ccc;
+     border-radius: 10px;
+  }
+
+      .login-form button {
+          width: 50%;
+          padding: 10px;
+          background-color: #f04a92;
+          color: #fff;
+          border: none;
+          border-radius: 20px;
+          cursor: pointer;
+          margin-left: 10px;
+          margin-top: 30px;
+      }
+
+      .login-form button:hover {
+          background-color: #e32082;
+      }
+
+      .options {
+          margin-top: 20px;
+          text-align: center;
+          font-size: 12px;
+      }
+      .option2{
+          margin-top: 20px;
+          text-align: center;
+          font-size: 12px;
+      }
+
+      .options a {
+          color: #1f51e4;
+          text-decoration: none;
+          margin: 0 10px;
+         
+      }
+      .option2 a{
+          color:red;
+          text-decoration: none;
+          margin: 0 50px;
+        
+      }
+      /*for hover feature */
+      .options a:hover {
+          text-decoration: underline;
+      }
+      .option2 a:hover{
+          text-decoration: underline;
+      }
+
+      .image-container {
+          width: 70%;
+          margin-right:5%;
+          margin-left: 5%;
+      }
+
+      .image-container img {
+          width: 100%;
+          height: auto;
+          border-radius: 10px;
+      }
